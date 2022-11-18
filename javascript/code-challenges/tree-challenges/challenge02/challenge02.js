@@ -8,39 +8,61 @@ class Node {
 }
 
 const depthFirstValues = (root) => {
+
+    if (root === null) return [];
+
     const stack = [root];
     const result = [];
     while (stack.length > 0) {
         const current = stack.pop();
         result.push(current.value);
-        
+
         if (current.right)
-        stack.push(current.right);
+            stack.push(current.right);
         if (current.left)
-        stack.push(current.left);
-        
+            stack.push(current.left);
+
     }
-    console.log(result);
     return result;
 };
 
-const a = new Node('a');
-const b = new Node('b');
-const c = new Node('c');
-const d = new Node('d');
-const e = new Node('e');
-const f = new Node('f');
+const isSame = (root1, root2) => {
 
-a.left = b;
-a.right = c;
-b.left = d;
-b.right = e;
-c.right = f;
+    const tree1 = depthFirstValues(root1);
+    const tree2 = depthFirstValues(root2);
+
+    let result = false;
+    if (tree1.length === tree2.length) {
+        for (let i = 0; i < tree1.length; i++) {
+            if (tree1[i] !== tree2[i]) {
+                return false;
+            } else {
+                result = true;
+            }
+        }
+        return result;
+    }
+    return result;
+};
+
+// Recursion
+// var isSameTree = function(p, q) {
+//     if(p === null && q === null){
+//         return true;
+//     }
+//     if((p === null && q !== null) || (p !== null && q === null) || (p.val !== q.val)){
+//         return false;
+//     }
+
+//     return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+
+// };
 
 
-const a1 = depthFirstValues(a);
-const a2 = depthFirstValues(a);
-
+module.exports = {
+    isSame,
+    Node
+}
 
 
 
